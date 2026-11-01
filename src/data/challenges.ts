@@ -1,0 +1,75 @@
+import { EcoChallenge } from '../types';
+
+export const ecoChallenges: EcoChallenge[] = [
+  {
+    id: 'ch-plastic-free',
+    title: 'Plastic-Free 7-Day Sprint',
+    duration: '7 Days',
+    difficulty: 'Intermediate',
+    description: 'Refuse all single-use plastic bottles, disposable coffee cups, plastic straws, and polythene grocery bags for one full week.',
+    instructions: [
+      'Carry your own reusable bottle and travel mug everywhere.',
+      'Request zero-plastic packaging when purchasing snacks.',
+      'Refuse single-use plastic straws and cutlery at cafeteria counters.',
+      'Log each successful day in your Eco Club dashboard.',
+    ],
+    points: 150,
+    badge: 'Zero-Waste Pioneer',
+  },
+  {
+    id: 'ch-byob',
+    title: 'Bring Your Own Bottle (BYOB)',
+    duration: '14 Days',
+    difficulty: 'Beginner',
+    description: 'Hydrate exclusively from reusable water bottles and fill up at campus filtered water fountains for two continuous weeks.',
+    instructions: [
+      'Fill up before leaving your room or hostel.',
+      'Use campus hydration stations located in every library and academic block.',
+      'Inspire two roommates or classmates to carry reusable bottles too.',
+    ],
+    points: 100,
+    badge: 'Hydration Guardian',
+  },
+  {
+    id: 'ch-save-energy',
+    title: 'Dorm Energy Saver Week',
+    duration: '7 Days',
+    difficulty: 'Beginner',
+    description: 'Slash non-essential electricity use in your dorm room, laboratory workspace, or study cubicle for 7 days.',
+    instructions: [
+      'Turn off fans, air conditioners, and desk lamps whenever stepping out for >5 minutes.',
+      'Unplug laptop power bricks when batteries reach 100%.',
+      'Take the stairs instead of the dormitory elevator for floors 1 through 4.',
+    ],
+    points: 120,
+    badge: 'Wattage Saver',
+  },
+  {
+    id: 'ch-green-commute',
+    title: 'Active Mobility & Green Commute',
+    duration: '5 Days',
+    difficulty: 'Intermediate',
+    description: 'Travel between classes, dormitories, and library exclusively via walking, cycling, or shared zero-emission campus shuttles.',
+    instructions: [
+      'Log at least 7,000 steps or 3 kilometers on bicycle daily on campus.',
+      'Avoid personal cars or ride-hailing for distances under 2 kilometers.',
+      'Use campus cycle share racks available near the main gates.',
+    ],
+    points: 180,
+    badge: 'Pedal Champion',
+  },
+  {
+    id: 'ch-campus-clean',
+    title: 'Campus Micro Cleanliness Quest',
+    duration: 'Weekend Quest',
+    difficulty: 'Advanced',
+    description: 'Spend 45 minutes on Saturday morning picking up stray paper, snack packaging, or debris along your favorite campus pathway.',
+    instructions: [
+      'Equip yourself with garden gloves and an eco-friendly refuse bag.',
+      'Safely collect recyclable plastics and landfill waste along the garden rim.',
+      'Deposit recyclables at the central Eco Club drop-off point behind the library.',
+    ],
+    points: 200,
+    badge: 'Sanctuary Defender',
+  },
+];

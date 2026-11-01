@@ -1,0 +1,89 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Catch-all default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == "himeshrajput956@gmail.com" ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.token.email))
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Admins registry
+    match /admins/{adminId} {
+      allow read: if isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Public readable content managed by Admins
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /teamMembers/{memberId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /gallery/{galleryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /announcements/{announcementId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /ecoImpact/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Public submission with PII isolation (Admin only read/update/delete)
+    match /applications/{applicationId} {
+      allow create: if request.resource.data.fullName is string &&
+                       request.resource.data.fullName.size() <= 100 &&
+                       request.resource.data.collegeEmail is string &&
+                       request.resource.data.collegeEmail.size() <= 120 &&
+                       request.resource.data.reasonToJoin is string &&
+                       request.resource.data.reasonToJoin.size() <= 1000;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /contactMessages/{messageId} {
+      allow create: if request.resource.data.name is string &&
+                       request.resource.data.name.size() <= 100 &&
+                       request.resource.data.email is string &&
+                       request.resource.data.email.size() <= 120 &&
+                       request.resource.data.message is string &&
+                       request.resource.data.message.size() <= 2000;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /eventRegistrations/{regId} {
+      allow create: if request.resource.data.name is string &&
+                       request.resource.data.name.size() <= 100 &&
+                       request.resource.data.email is string &&
+                       request.resource.data.email.size() <= 120 &&
+                       request.resource.data.eventId is string;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

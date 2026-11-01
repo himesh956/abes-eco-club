@@ -1,0 +1,252 @@
+{
+  "entities": {
+    "Admin": {
+      "title": "Admin User",
+      "description": "Authorized administrator profile for the Eco Club management dashboard.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Verified Google email of the admin."
+        },
+        "role": {
+          "type": "string",
+          "description": "Admin access role.",
+          "enum": ["superadmin", "editor", "coordinator"]
+        },
+        "addedAt": {
+          "type": "string",
+          "description": "ISO timestamp when admin was granted access."
+        }
+      },
+      "required": ["email", "role"]
+    },
+    "Application": {
+      "title": "Student Application",
+      "description": "Student recruitment application for joining the Eco Club.",
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Full name of the student."
+        },
+        "collegeEmail": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "College email address."
+        },
+        "studentId": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Student ID or Roll Number."
+        },
+        "department": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Academic department or discipline."
+        },
+        "academicYear": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Year of study."
+        },
+        "interestedTeam": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "Team division applying for."
+        },
+        "reasonToJoin": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Motivation to join the Eco Club."
+        },
+        "skills": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Relevant skills and eco interests."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "approved", "rejected"],
+          "description": "Review status by administrators."
+        },
+        "submittedAt": {
+          "type": "string",
+          "description": "Submission ISO timestamp."
+        }
+      },
+      "required": ["fullName", "collegeEmail", "department", "academicYear", "interestedTeam", "reasonToJoin", "skills"]
+    },
+    "ContactMessage": {
+      "title": "Contact Message",
+      "description": "Public inquiry or message dispatched to the Eco Club secretariat.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Name of the sender."
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Email address of the sender."
+        },
+        "subject": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Subject line."
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Message content."
+        },
+        "read": {
+          "type": "boolean",
+          "description": "Whether message has been reviewed."
+        },
+        "submittedAt": {
+          "type": "string",
+          "description": "Submission ISO timestamp."
+        }
+      },
+      "required": ["name", "email", "subject", "message"]
+    },
+    "Event": {
+      "title": "Eco Club Event",
+      "description": "Environmental event, plantation drive, or workshop.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 150 },
+        "date": { "type": "string", "maxLength": 80 },
+        "time": { "type": "string", "maxLength": 80 },
+        "location": { "type": "string", "maxLength": 150 },
+        "category": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["Upcoming", "Ongoing", "Past"] },
+        "description": { "type": "string", "maxLength": 500 },
+        "fullDetails": { "type": "string", "maxLength": 3000 },
+        "imageUrl": { "type": "string", "maxLength": 500 },
+        "registrationOpen": { "type": "boolean" },
+        "maxAttendees": { "type": "number" },
+        "registeredCount": { "type": "number" }
+      },
+      "required": ["title", "date", "location", "category", "status", "description"]
+    },
+    "EventRegistration": {
+      "title": "Event Registration",
+      "description": "Registration entry for an eco drive or workshop.",
+      "type": "object",
+      "properties": {
+        "eventId": { "type": "string", "maxLength": 100 },
+        "eventTitle": { "type": "string", "maxLength": 150 },
+        "name": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 120 },
+        "studentId": { "type": "string", "maxLength": 50 },
+        "notes": { "type": "string", "maxLength": 500 },
+        "registeredAt": { "type": "string" }
+      },
+      "required": ["eventId", "name", "email"]
+    },
+    "TeamMember": {
+      "title": "Team Member",
+      "description": "Faculty advisor or student team coordinator profile.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "maxLength": 100 },
+        "department": { "type": "string", "maxLength": 120 },
+        "category": { "type": "string", "maxLength": 60 },
+        "bio": { "type": "string", "maxLength": 500 },
+        "initials": { "type": "string", "maxLength": 4 },
+        "avatarUrl": { "type": "string", "maxLength": 500 },
+        "linkedin": { "type": "string", "maxLength": 300 },
+        "github": { "type": "string", "maxLength": 300 },
+        "email": { "type": "string", "maxLength": 120 }
+      },
+      "required": ["name", "role", "department", "category", "bio"]
+    },
+    "GalleryItem": {
+      "title": "Gallery Item",
+      "description": "Photo record documenting field activities.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 120 },
+        "category": { "type": "string", "maxLength": 60 },
+        "date": { "type": "string", "maxLength": 60 },
+        "location": { "type": "string", "maxLength": 120 },
+        "imageUrl": { "type": "string", "maxLength": 500 },
+        "caption": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["title", "category", "date", "imageUrl", "caption"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Campus bulletin or notification.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 150 },
+        "date": { "type": "string", "maxLength": 60 },
+        "priority": { "type": "string", "enum": ["High", "Normal", "Opportunity"] },
+        "summary": { "type": "string", "maxLength": 500 },
+        "details": { "type": "string", "maxLength": 2000 },
+        "ctaText": { "type": "string", "maxLength": 60 },
+        "ctaLink": { "type": "string", "maxLength": 200 }
+      },
+      "required": ["title", "date", "priority", "summary", "details"]
+    },
+    "EcoImpact": {
+      "title": "Eco Impact Statistics",
+      "description": "Recorded or verified campus sustainability figures.",
+      "type": "object",
+      "properties": {
+        "treesPlanted": { "type": "number" },
+        "studentsEngaged": { "type": "number" },
+        "eventsOrganized": { "type": "number" },
+        "plasticDivertedKg": { "type": "number" },
+        "isVerified": { "type": "boolean" },
+        "lastUpdated": { "type": "string" }
+      },
+      "required": ["treesPlanted", "studentsEngaged", "eventsOrganized", "plasticDivertedKg"]
+    }
+  },
+  "firestore": {
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Store authorized admin profiles and role permissions."
+    },
+    "/applications/{applicationId}": {
+      "schema": "Application",
+      "description": "Student recruitment applications."
+    },
+    "/contactMessages/{messageId}": {
+      "schema": "ContactMessage",
+      "description": "Public contact and inquiry submissions."
+    },
+    "/events/{eventId}": {
+      "schema": "Event",
+      "description": "Eco club drives, workshops, and campaigns."
+    },
+    "/eventRegistrations/{registrationId}": {
+      "schema": "EventRegistration",
+      "description": "Registrations for events."
+    },
+    "/teamMembers/{memberId}": {
+      "schema": "TeamMember",
+      "description": "Faculty heads, core members, and student leads."
+    },
+    "/gallery/{galleryId}": {
+      "schema": "GalleryItem",
+      "description": "Curated photo records of field initiatives."
+    },
+    "/announcements/{announcementId}": {
+      "schema": "Announcement",
+      "description": "Official announcements and bulletins."
+    },
+    "/ecoImpact/{docId}": {
+      "schema": "EcoImpact",
+      "description": "Environmental impact metrics and campus telemetry."
+    }
+  }
+}
